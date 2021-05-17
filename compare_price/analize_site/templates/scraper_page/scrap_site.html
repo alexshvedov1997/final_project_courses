@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+Поиск цены игр
+{% endblock %}
+
+{% block content %}
+<p>Scraper</p>
+<h2>Warp.by</h2>
+{% for el in elem %}
+<p>{{ el }}</p>
+{% endfor %}
+<h2>Belconsole</h2>
+{% for el in elem_2 %}
+<p>{{ el }}</p>
+{% endfor %}
+{% endblock %}
