@@ -3,6 +3,7 @@ from .classes.warp_ps4 import WarpGameFind
 from .classes.belconsole_ps4 import BelconsoleGameFind
 
 
+
 def controler_two_price(request):
     obj_ = WarpGameFind(r"https://warp.by/igry-dlya-ps4")
     obj_.get_all_link_page(obj_.get_count_of_page())
