@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+Список игр
+{% endblock %}
+
+{% block content %}
+<p>Форма для поиска игр по сайтам</p>
+<form action="." method="post">
+        {% csrf_token %}
+        <p>Введите название игры:<input type="text" name="game_name" ></p>
+        <p><input type="submit" value="Начать поиск"></p>
+</form>
+
+{% endblock %}

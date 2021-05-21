@@ -11,9 +11,9 @@
     {% endif %}
 
 <form action="{% url 'account:login' %}" method="post">
-    {{ form.as_p }}
     {% csrf_token %}
-    <input type="hidden" name="next" value="{{ next }}" />
+    {{ form.as_p }}
+    <input type="hidden" value="{{ next }}" />
     <p><input type="submit" value="Log-in"></p>
 </form>
 

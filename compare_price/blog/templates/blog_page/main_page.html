@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block content %}
+
+<p>Main page</p>
+<p><a href="{% url 'account:logout' %}">Выйти</a></p>
+{% for obj in list_review %}
+<p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
+{% endfor %}
+{% include "blog_page/pagination.html" with page=list_review %}
+{% endblock %}

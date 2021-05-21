@@ -1,16 +1,30 @@
 {% extends "base.html" %}
 {% block title %}
-Поиск цены игр
+Список игр
 {% endblock %}
 
 {% block content %}
-<p>Scraper</p>
-<h2>Warp.by</h2>
-{% for el in elem %}
-<p>{{ el }}</p>
+<table>
+    <caption><a href="https://warp.by/igry-dlya-ps4">Warp.by</a></caption>
+    <tr><th>Название</th><th>Стоимость</th></tr>
+        {% for el in elem %}
+            {% for key, value in el.items %}
+        <tr><td> {{ key }}</td><td> {{ value }}</td></tr>
+
+    {% endfor %}
 {% endfor %}
-<h2>Belconsole</h2>
-{% for el in elem_2 %}
-<p>{{ el }}</p>
+</table>
+<p></p>
+<table>
+    <caption><a href="https://www.belconsole.by/playstation_4/igry_dlya_ps4/">Belconsole.by</a></caption>
+    <tr><th>Название</th><th>Стоимость</th></tr>
+        {% for el in elem_2 %}
+            {% for key, value in el.items %}
+        <tr><td> {{ key }}</td><td> {{ value }}</td></tr>
+    {% endfor %}
 {% endfor %}
+</table>
+
+
+
 {% endblock %}
