@@ -23,6 +23,17 @@ class ReviewGame(models.Model):
         return reverse('blog:detail_review', kwargs={'slug': self.slug})
 
 
+class CommentModel(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='blog_comment')
+    body = models.TextField(verbose_name="Комментарий")
+    publish = models.DateTimeField(default=timezone.now)
+
+
+
+
+
+
 
 
 # Create your models here.

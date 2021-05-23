@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("blog/", include("analize_site.urls", namespace="analize_site")),
     path("account/", include("account.urls", namespace="account")),
-path("", include("blog.urls", namespace="blog")),
+    path("", include("blog.urls", namespace="blog")),
+    path('social-auth/', include('social_django.urls', namespace='social')),
 ]
 
 

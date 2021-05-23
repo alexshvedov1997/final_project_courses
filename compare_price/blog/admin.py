@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ReviewGame
+from .models import ReviewGame, CommentModel
 from django.utils.html import mark_safe
 
 # Register your models here.
@@ -21,3 +21,7 @@ class AdminReviewGame(admin.ModelAdmin):
 
     get_image.__name__ = "Изображение"
 
+
+@admin.register(CommentModel)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['author', 'body', 'publish']

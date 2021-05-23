@@ -7,4 +7,20 @@
 {% block content %}
     <h3>{{ review_game.title }}</h3>
     <p>{{ review_game.body }}</p>
+
+   <!--  {% if user.is_authenticated %} -->
+
+        <form action="." method="post">
+            <p>Введите коментарий</p>
+            {{ comment_form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Создать комментарий">
+        </form>
+  <!--   {% endif %} -->
+{% for elem in comments %}
+    <h3>Пользователь: {{ elem.author }}</h3>
+    <h6>Дата публикации: {{ elem.publish }}</h6>
+    <p>{{ elem.body }}</p>
+
+{% endfor %}
 {% endblock %}
