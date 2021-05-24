@@ -11,5 +11,11 @@
 {% for obj in list_review %}
 <p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
 {% endfor %}
+
+<form action="{% url 'blog:search_handler' %}" method="get">
+    {{ search_form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Поиск">
+</form>
 {% include "blog_page/pagination.html" with page=list_review %}
 {% endblock %}
