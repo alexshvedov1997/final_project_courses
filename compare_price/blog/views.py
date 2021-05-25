@@ -1,14 +1,21 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import ReviewGame, CommentModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .forms import CommentForm, SearchForm
+from .forms import CommentForm, SearchForm, ReviewForm
 from django.contrib.postgres.search import SearchVector
+from taggit.models import Tag
 
 
-def main_page_show(request):
+def main_page_show(request, tag_slug=None):
     obj_list = ReviewGame.objects.all()
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        obj_list = obj_list.filter(tags__in=[tag])
     paginator = Paginator(obj_list, 2)
     page = request.GET.get('page')
+
+
     try:
         obj_ = paginator.page(page)
     except PageNotAnInteger:
@@ -18,7 +25,7 @@ def main_page_show(request):
     search_form = SearchForm
 
     return render(request, "blog_page/main_page.html", {'page':page, 'list_review': obj_ ,
-                                                        "search_form" : search_form})
+                                                        "search_form" : search_form, 'tag':tag})
 
 
 def review_detail(request, slug):
@@ -54,6 +61,20 @@ def search_handler(request):
                 search=SearchVector('title'),
             ).filter(search=query)
             print("res", res)
-    return render(request, 'blog_page/search_results.html', {'res': res })
+    return render(request, 'blog_page/search_results.html', {'res': res})
+
+
+def create_review(request):
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            new_review = review_form.save(commit=False)
+            new_review.author = request.user
+            new_review.save()
+            return  redirect('blog:main_pg')
+    new_form = ReviewForm()
+    return render(request, "blog_page/create_review.html", {"new_form": new_form})
+
+
 
 # Create your views here.

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Создание ревью
+{% endblock %}
+
+{% block content %}
+<h4>Создание ревью</h4>
+<form action="." method="post">
+    {{ new_form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Создать">
+</form>
+{% endblock %}

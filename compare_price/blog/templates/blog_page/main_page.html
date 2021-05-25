@@ -6,10 +6,23 @@
 
 {% block content %}
 
-<p>Main page</p>
+<p>Главная страница</p>
 <p><a href="{% url 'account:logout' %}">Выйти</a></p>
+{% if user.is_authenticated %}
+<p><a href="{% url 'blog:create_review' %}">Написать рецензию</a></p>
+{% endif %}
 {% for obj in list_review %}
 <p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
+{% if obj.tags.all %}
+<p>Тэг:
+{% for tg in obj.tags.all %}
+<a href="{% url 'blog:post_list_by_tag' tg.slug %}">
+{{ tg.name }}
+</a>
+{% if not forloop.last %}, {% endif %}
+{% endfor %}
+    {% endif %}
+</p>
 {% endfor %}
 
 <form action="{% url 'blog:search_handler' %}" method="get">
