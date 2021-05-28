@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from .forms import CommentForm, SearchForm, ReviewForm
 from django.contrib.postgres.search import SearchVector
 from taggit.models import Tag
+import analize_site.models as prj
 
 
 def main_page_show(request, tag_slug=None):
@@ -32,13 +33,27 @@ def review_detail(request, slug):
     obj_ = get_object_or_404(ReviewGame, slug=slug)
     new_comment = None
     comment_form = None
-    comment_list = CommentModel.objects.all()
+    comment_list = CommentModel.objects.filter(post=obj_)
+    game_name= prj.WarpGames.objects.annotate(
+        search=SearchVector('name'),
+    ).filter(search=obj_.title)
+    game_warp= []
+    game_belconsole = []
+    for elem in game_name:
+        game_warp.append(prj.WarpGames.objects.filter(name=elem))
+    game_name = prj.BelconsoleGames.objects.annotate(
+        search=SearchVector('name'),
+    ).filter(search=obj_.title)
+    for elem in game_name:
+        game_belconsole.append(prj.BelconsoleGames.objects.filter(name=elem))
+
     if request.user.is_authenticated:
         if request.method == 'POST':
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid:
                 new_comment = comment_form.save(commit=False)
                 new_comment.author = request.user
+                new_comment.post = obj_
                 new_comment.save()
         else:
             comment_form = CommentForm()
@@ -46,7 +61,8 @@ def review_detail(request, slug):
                   "blog_page/detail_review.html",
                   {'review_game': obj_,
                    "comment_form": comment_form,
-                   'comments': comment_list})
+                   'comments': comment_list, 'game_warp':game_warp,
+                   "game_belconsole":game_belconsole})
 
 
 def search_handler(request):

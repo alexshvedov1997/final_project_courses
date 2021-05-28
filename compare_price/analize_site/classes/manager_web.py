@@ -17,3 +17,5 @@ class ManagerWebPage:
         obj_.get_all_link_page(obj_.get_count_of_page())
         obj_.get_all_data()
         return obj_.find_game(name)
+
+

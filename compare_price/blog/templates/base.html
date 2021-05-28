@@ -1,11 +1,17 @@
 <!DOCTYPE html>
+{% load staticfilies %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
+<link type = "text/css" href = "{% static 'css/base.css' %}"  rel="stylesheet">
+
 </head>
 <body>
+
 {% block content %}
 {% endblock %}
+
+
 </body>
 </html>

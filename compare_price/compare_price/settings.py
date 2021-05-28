@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'django.contrib.postgres',
-    'taggit'
+    'taggit',
+    'django_crontab',
 
 ]
 
@@ -85,13 +86,16 @@ WSGI_APPLICATION = 'compare_price.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'games',
+        'NAME': 'analize_games',
         'USER': 'alexander',
         'PASSWORD' : '12345',
         'HOST':'localhost'
     }
 }
 
+CRONJOBS = [
+    ('*/5 * * * *', 'analize_site.cron.cron_add_games')
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -130,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = os.path.join(BASE_DIR, "static"),
 
 LOGIN_REDIRECT_URL = 'blog:main_pg'
 LOGOUT_URL = "account:logout"

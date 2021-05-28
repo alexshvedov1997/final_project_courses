@@ -30,7 +30,13 @@ class CommentModel(models.Model):
                                related_name='blog_comment')
     body = models.TextField(verbose_name="Комментарий")
     publish = models.DateTimeField(default=timezone.now)
+    post = models.ForeignKey(ReviewGame, on_delete=models.CASCADE,
+                             related_name="post_comment")
 
+
+class ModelOkay2(models.Model):
+    price = models.CharField(max_length=260)
+    name = models.CharField(max_length=250, primary_key=True)
 
 
 

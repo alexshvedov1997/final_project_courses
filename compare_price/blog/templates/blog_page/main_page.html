@@ -2,15 +2,18 @@
 
 {% block title %}
 Главная страница
+
 {% endblock %}
 
 {% block content %}
 
 <p>Главная страница</p>
-<p><a href="{% url 'account:logout' %}">Выйти</a></p>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 {% if user.is_authenticated %}
-<p><a href="{% url 'blog:create_review' %}">Написать рецензию</a></p>
+<a href="{% url 'account:logout' %}">Выйти</a>
+<a href="{% url 'blog:create_review' %}">Написать рецензию</a>
 {% endif %}
+</nav>
 {% for obj in list_review %}
 <p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
 {% if obj.tags.all %}
@@ -30,5 +33,9 @@
     {% csrf_token %}
     <input type="submit" value="Поиск">
 </form>
+
 {% include "blog_page/pagination.html" with page=list_review %}
+
+
+
 {% endblock %}
