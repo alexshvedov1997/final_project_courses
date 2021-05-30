@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar-nav">
+{% if user.is_authenticated %}
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'blog:main_pg' %}">Главная страница</a>
+        </li>
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'account:profile' %}">Профиль</a>
+            </li>
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'blog:create_review' %}">Написать рецензию</a>
+            </li>
+        <li class="nav-item">
+
+<a class="nav-link" href="{% url 'account:logout' %}">Выйти</a>
+        </li>
+
+    {% else %}
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'blog:main_pg' %}">Главная страница</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:register' %}">Регистрация</a>
+            </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{% url 'account:login' %}">Войти</a>
+            </li>
+
+
+{% endif %}
+</ul>
+
+</nav>

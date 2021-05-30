@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 Ревью игры
 {% endblock %}
 
 {% block content %}
+{% include 'include_block_html/adaptive_menu_account.html' %}
+<div class="container px-1">
     <h3>{{ review_game.title }}</h3>
 <p><a href="https://warp.by/igry-dlya-ps4">warp.by</a></p>
 {% for games in game_warp %}
@@ -21,16 +24,23 @@
 {% endfor %}
 
     <p>{{ review_game.body }}</p>
+{% if user.is_authenticated %}
         <form action="." method="post">
-            <p>Введите коментарий</p>
-            {{ comment_form.as_p }}
+            <div class="col-md-5 mb-0">
+                <div class="row-sm-5">
+
+            {{ comment_form|crispy }}
+
             {% csrf_token %}
+            </div>
+            </div>
             <input type="submit" value="Создать комментарий">
         </form>
+{% endif %}
 {% for elem in comments %}
     <h3>Пользователь: {{ elem.author }}</h3>
     <h6>Дата публикации: {{ elem.publish }}</h6>
     <p>{{ elem.body }}</p>
-
+</div>
 {% endfor %}
 {% endblock %}

@@ -1,12 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Edit your account{% endblock %}
+{% load crispy_forms_tags %}
+{% block title %}Редактировать ваш аккаунт{% endblock %}
 {% block content %}
-<h1>Edit your account</h1>
-<p>You can edit your account using the following form:</p>
+{% include 'include_block_html/adaptive_menu_account.html' %}
+<div class="container">
+  <div class="row h-100 justify-content-center align-items-center">
+<h3>Редактировать ваш аккаунт</h3>
+<p>Заполните следующие поля:</p>
+
 <form action="." method="post" enctype="multipart/form-data">
-{{ user_form.as_p }}
-{{ profile_form.as_p }}
+    <div class="col-md-4 mb-0">
+{{ user_form|crispy }}
+{{ profile_form|crispy}}
 {% csrf_token %}
-<p><input type="submit" value="Save changes"></p>
+    </div>
+<p><input type="submit" value="Сохранить изменения"></p>
 </form>
+       </div>
+</div>
 {% endblock %}

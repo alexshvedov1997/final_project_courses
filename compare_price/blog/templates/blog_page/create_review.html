@@ -1,14 +1,22 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}
 Создание ревью
 {% endblock %}
 
 {% block content %}
+{% include 'include_block_html/adaptive_menu_account.html' %}
+<div class="container">
+  <div class="row h-100 justify-content-center align-items-center">
 <h4>Создание ревью</h4>
 <form action="." method="post">
-    {{ new_form.as_p }}
+    <div class="col-md-4 mb-0">
+    {{ new_form|crispy }}
+    </div>
     {% csrf_token %}
     <input type="submit" value="Создать">
 </form>
+  </div>
+</div>
 {% endblock %}

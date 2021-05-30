@@ -6,7 +6,8 @@
 
 
 {% block content %}
-<p><a href="{% url 'blog:main_pg' %}">Главная страница</a></p>
+{% include 'include_block_html/adaptive_menu_account.html' %}
+
 {% for obj in res %}
 <p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
 {% endfor %}

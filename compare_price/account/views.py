@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
@@ -33,8 +33,20 @@ def edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            return redirect('account:profile')
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-    return render(request,'account/edit.html',
-            {'user_form': user_form,'profile_form': profile_form})
+    return render(request, 'account/edit.html',
+            {'user_form': user_form, 'profile_form': profile_form})
+
+
+@login_required
+def show_profile(request):
+    user_ = request.user
+    profile = None
+    try:
+      profile = Profile.objects.get(user=user_)
+    except:
+        profile = None
+    return render(request, "account/profile.html", { 'user': user_ , 'profile': profile})

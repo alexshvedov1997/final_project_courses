@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}
 Главная страница
@@ -7,13 +9,51 @@
 
 {% block content %}
 
-<p>Главная страница</p>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar-nav">
 {% if user.is_authenticated %}
-<a href="{% url 'account:logout' %}">Выйти</a>
-<a href="{% url 'blog:create_review' %}">Написать рецензию</a>
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'account:profile' %}">Профиль</a>
+            </li>
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'blog:create_review' %}">Написать рецензию</a>
+            </li>
+        <li class="nav-item">
+<a class="nav-link" href="{% url 'account:logout' %}">Выйти</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'account:register' %}">Регистрация</a>
+            </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{% url 'account:login' %}">Войти</a>
+            </li>
+
+
 {% endif %}
+</ul>
+ <div class="input-group justify-content-end">
+  <form class="form-inline" role="search" action="{% url 'blog:search_handler' %}" method="get">
+
+        <div class="form-group ">
+        <div class="input-group">
+
+    {{ search_form.as_p }}
+
+    {% csrf_token %}
+         <!--     <button class="btn btn-outline-secondary anonymous-search" type="submit">Поиск</button> -->
+            <span class="input-group-btn">
+             <input type="submit" value="Поиск">
+           <!--       <button class="btn btn-outline-secondary anonymous-search" type="submit">Поиск</button> -->
+                </span>
+            </div>
+            </div>
+</form>
+</div>
+
 </nav>
+
 {% for obj in list_review %}
 <p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
 {% if obj.tags.all %}
@@ -28,14 +68,6 @@
 </p>
 {% endfor %}
 
-<form action="{% url 'blog:search_handler' %}" method="get">
-    {{ search_form.as_p }}
-    {% csrf_token %}
-    <input type="submit" value="Поиск">
-</form>
-
 {% include "blog_page/pagination.html" with page=list_review %}
-
-
 
 {% endblock %}

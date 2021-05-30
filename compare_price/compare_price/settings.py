@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'taggit',
     'django_crontab',
-
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +153,4 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '358101855081-d8n22ogjen93qqageale3pmm93bna20a.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'qGPM5y4byWRKQ2g8ePr1RzZH'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
