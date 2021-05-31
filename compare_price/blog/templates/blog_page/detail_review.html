@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}
 Ревью игры
@@ -9,19 +10,31 @@
 {% include 'include_block_html/adaptive_menu_account.html' %}
 <div class="container px-1">
     <h3>{{ review_game.title }}</h3>
-<p><a href="https://warp.by/igry-dlya-ps4">warp.by</a></p>
+    <div class="brd">
+    <div class="row">
+<h4 class="text-center"><u>Стоимость игры в интернет магазинах</u></h4>
+    <div class="col-lg-6">
+<p>Ссылка на магазин: <a href="https://warp.by/igry-dlya-ps4">warp.by</a></p>
 {% for games in game_warp %}
     {% for game in games %}
       <p>{{ game.name }} : {{ game.price }} </p>
     {% endfor %}
 {% endfor %}
-
-<p><a href="https://www.belconsole.by/playstation_4/igry_dlya_ps4/">belconsole.by</a></p>
+    </div>
+<div class="col-lg-6">
+<p>Ссылка на магазин: <a href="https://www.belconsole.by/playstation_4/igry_dlya_ps4/">belconsole.by</a></p>
 {% for games in game_belconsole %}
     {% for game in games %}
       <p>{{ game.name }} : {{ game.price }} </p>
     {% endfor %}
 {% endfor %}
+    </div>
+    </div>
+</div>
+
+<img src="{% if review_game.image %}{{ review_game.image.url }}
+{% else %}{% static 'img/no_image.jpg' %}{% endif %}" class="img-thumbnail" class="text-center">
+
 
     <p>{{ review_game.body }}</p>
 {% if user.is_authenticated %}
@@ -37,10 +50,17 @@
             <input type="submit" value="Создать комментарий">
         </form>
 {% endif %}
+    <p><br></p>
 {% for elem in comments %}
-    <h3>Пользователь: {{ elem.author }}</h3>
-    <h6>Дата публикации: {{ elem.publish }}</h6>
+<div class="brd_2">
+    <h4>Пользователь: {{ elem.author }}</h4>
+    <p class="date">Дата публикации: {{ elem.publish }}</p>
     <p>{{ elem.body }}</p>
 </div>
+    <p><br></p>
 {% endfor %}
+    </div>
+
+{% include "include_block_html/footer_page.html" %}
+
 {% endblock %}

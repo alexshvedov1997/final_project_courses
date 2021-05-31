@@ -53,11 +53,16 @@
 </div>
 
 </nav>
-
+<div class="list_review">
+<h3>Список рецензий</h3>
 {% for obj in list_review %}
-<p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
+    <div class="space_between">
+<p><a href="{{ obj.get_absolute_url }}">{{ obj.title }} </a><span class="date">
+    Дата публикации {{ obj.publish }}
+</span></p>
+
 {% if obj.tags.all %}
-<p>Тэг:
+<p><small>Тэг:
 {% for tg in obj.tags.all %}
 <a href="{% url 'blog:post_list_by_tag' tg.slug %}">
 {{ tg.name }}
@@ -65,9 +70,17 @@
 {% if not forloop.last %}, {% endif %}
 {% endfor %}
     {% endif %}
-</p>
+</small></p>
+        <p><br> </p>
+
+
+        </div>
+
 {% endfor %}
 
 {% include "blog_page/pagination.html" with page=list_review %}
+</div>
+
+{% include "include_block_html/footer_page.html" %}
 
 {% endblock %}
