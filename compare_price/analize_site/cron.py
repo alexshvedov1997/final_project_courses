@@ -19,7 +19,6 @@ def add_to_games_warp_db(dict_):
 
 
 def cron_add_games():
-
     games = GameInformation()
     add_to_games_warp_db(games.all_data_warp())
     add_to_games_bel_db(games.all_data_belconsole())

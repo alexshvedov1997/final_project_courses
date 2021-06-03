@@ -7,6 +7,8 @@ from taggit.models import Tag
 import analize_site.models as prj
 
 
+
+
 def main_page_show(request, tag_slug=None):
     obj_list = ReviewGame.objects.all()
     tag = None
