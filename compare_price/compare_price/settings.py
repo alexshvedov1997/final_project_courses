@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_crontab',
     'crispy_forms',
+    'telgram_bot'
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,5 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '358101855081-d8n22ogjen93qqageale3pmm93bna20a.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'qGPM5y4byWRKQ2g8ePr1RzZH'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOT_TOKEN = "1818554220:AAEltKjzI5JEAY4zjEOu70kcuuWfTJJtfe4"
