@@ -13,3 +13,8 @@ social-auth-app-django
 django-bootstrap
 pyTelegramBotApi
 wheel
+
+
+
+
+Please, switch to branch dev
