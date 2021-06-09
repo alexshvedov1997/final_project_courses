@@ -31,10 +31,12 @@
     </div>
     </div>
 </div>
-
+<p><br></p>
+<div class="text-center">
 <img src="{% if review_game.image %}{{ review_game.image.url }}
-{% else %}{% static 'img/no_image.jpg' %}{% endif %}" class="img-thumbnail" class="text-center">
-
+{% else %}{% static 'img/no_image.jpg' %}{% endif %}"  width="300" height="450"  >
+</div>
+    <p><br></p>
 
     <p>{{ review_game.body }}</p>
 {% if user.is_authenticated %}

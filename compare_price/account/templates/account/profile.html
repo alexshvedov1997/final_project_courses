@@ -7,11 +7,13 @@
 
 {% block content %}
 {% include 'include_block_html/adaptive_menu_account.html' %}
+<h3 class="text-center">Логин:{{ user.username }}</h3>
+<div class="profile">
 <div class="row">
     <div class="col-lg-2">
 {% if profile %}
 <img src="{% if profile.photo %}{{ profile.photo.url }}
-{% else %}{% static 'img/no_image.jpg' %}{% endif %}" class="img-thumbnail">
+{% else %}{% static 'img/no_image.jpg' %}{% endif %}"  width="200" height="200">
 {% else %}
 <img src="{% static 'img/no_image.jpg'%}">
 {% endif %}
@@ -19,7 +21,7 @@
         <p><a href="{% url 'account:password_change' %}">Изменить пароль</a></p>
         </div>
     <div class="col-lg-5">
-<h3>Логин:{{ user.username }}</h3>
+
 <p>Имя: {{ user.first_name }}</p>
         {% if profile %}
        <p>Фамилия: {{ user.last_name }}</p>
@@ -30,4 +32,6 @@
         </div>
 
 </div>
+    </div>
+{% include "include_block_html/footer_page.html" %}
 {% endblock %}

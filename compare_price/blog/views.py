@@ -15,7 +15,7 @@ def main_page_show(request, tag_slug=None):
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         obj_list = obj_list.filter(tags__in=[tag])
-    paginator = Paginator(obj_list, 2)
+    paginator = Paginator(obj_list, 4)
     page = request.GET.get('page')
 
 
@@ -79,7 +79,7 @@ def search_handler(request):
                 search=SearchVector('title'),
             ).filter(search=query)
             print("res", res)
-    return render(request, 'blog_page/search_results.html', {'res': res})
+    return render(request, 'blog_page/search_results.html', {'res': res, 'query': query})
 
 
 def create_review(request):

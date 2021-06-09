@@ -4,12 +4,22 @@
 {% endblock %}
 
 {% block content %}
-<p><a href="{% url 'blog:main_pg' %}">На главную</a></p>
-<p>Форма для поиска игр по сайтам</p>
+{% include 'include_block_html/adaptive_menu_account.html' %}
+
+<div class="form-group">
 <form action="." method="post">
         {% csrf_token %}
-        <p>Введите название игры:<input type="text" name="game_name" ></p>
-        <p><input type="submit" value="Начать поиск"></p>
+        <div class="container">
+                <h3>Форма для поиска игр по сайтам</h3>
+                <label for="g_name" class="col-form-label col-3">Введите название игры:</label>
+                <div class="col-5">
+        <input type="text" name="game_name" id="g_name">
+        <p><br></p>
+                <div class="col-3">
+        <input type="submit" value="Начать поиск" class="btn btn-primary">
+                        </div>
+                </div>
 </form>
-
+        </div>
+{% include "include_block_html/footer_page.html" %}
 {% endblock %}

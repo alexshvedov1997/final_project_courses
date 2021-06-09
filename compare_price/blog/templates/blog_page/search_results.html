@@ -7,8 +7,27 @@
 
 {% block content %}
 {% include 'include_block_html/adaptive_menu_account.html' %}
-
+<div class="list_review">
+    <h3>Поиск записей со словом:<em> {{ query }} </em> </h3>
+    <h6>
+Найдено: {{ res.count }} записей
+</h6>
+    <p><br></p>
 {% for obj in res %}
-<p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
+
+<p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></a><span class="date">
+    Дата публикации {{ obj.publish }}</span></p>
+{% if obj.tags.all %}
+<p><small>Тэг:
+{% for tg in obj.tags.all %}
+<a href="{% url 'blog:post_list_by_tag' tg.slug %}">
+{{ tg.name }}
+</a>
+{% if not forloop.last %}, {% endif %}
 {% endfor %}
+    {% endif %}
+</small></p>
+<p><br> </p>
+{% endfor %}
+    </div>
 {% endblock %}
