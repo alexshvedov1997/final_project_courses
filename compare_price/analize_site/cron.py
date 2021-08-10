@@ -2,6 +2,11 @@ from .classes.game_handler import GameInformation
 from django.db import connection
 
 
+
+
+
+
+
 def add_to_games_bel_db(dict_):
     with connection.cursor() as cursor:
         for key, value in dict_.items():
